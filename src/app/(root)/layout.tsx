@@ -4,6 +4,8 @@ import "@/app/globals.css";
 import NextAuthProvider from "@/components/providers/next-auth.provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RootNavbar from "@/components/root-navbar";
+import Footer from "@/components/footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +21,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <NextAuthProvider>{children}</NextAuthProvider>
+      <body className={`${inter.className}`}>
+        <NextAuthProvider>
+          <RootNavbar />
+          <div className="mt-[3.15rem] px-1">{children}</div>
+          <div className="mt-5">
+            <Footer />
+          </div>
+        </NextAuthProvider>
         <ToastContainer autoClose={2000} />
       </body>
     </html>

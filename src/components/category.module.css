@@ -1,0 +1,37 @@
+.Category {
+  width: 32%;
+  aspect-ratio: 16/9;
+  background-image: url("../assets/banner.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.Category .category_content {
+  height: 100%;
+  transition: 0.2s ease;
+}
+
+.Category .category_content .heading {
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .Category {
+    width: 48%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .Category {
+    width: 100%;
+  }
+}
