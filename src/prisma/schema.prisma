@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -18,10 +15,12 @@ model User {
   image     String?
   provider  Provider
   role      Role     @default(User)
+  orders    Order[]
+  reviews   Review[]
   createdAt DateTime @default(now())
 }
 
-model VerifyUser {
+model UserVerification {
   id        String   @id @default(cuid())
   name      String
   email     String
@@ -30,6 +29,58 @@ model VerifyUser {
   expiresAt DateTime
   createdAt DateTime @default(now())
 }
+
+model FoodCategory {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  foodItems FoodItem[]
+  createdAt DateTime   @default(now())
+}
+
+model FoodItem {
+  id          String       @id @default(cuid())
+  name        String
+  description String
+  price       Decimal
+  category    FoodCategory @relation(fields: [categoryId], references: [id])
+  categoryId  String
+  orderItems  OrderItem[]
+  reviews     Review[]
+  createdAt   DateTime     @default(now())
+}
+
+model Order {
+  id          String      @id @default(cuid())
+  totalAmount Decimal
+  user        User        @relation(fields: [userId], references: [id])
+  userId      String
+  orderItems  OrderItem[]
+  createdAt   DateTime    @default(now())
+}
+
+model OrderItem {
+  id         String   @id @default(cuid())
+  price      Decimal
+  quantity   Int
+  order      Order    @relation(fields: [orderId], references: [id])
+  orderId    String
+  foodItem   FoodItem @relation(fields: [foodItemId], references: [id])
+  foodItemId String
+  createdAt  DateTime @default(now())
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  rating     Int
+  comment    String?
+  user       User     @relation(fields: [userId], references: [id])
+  userId     String
+  foodItem   FoodItem @relation(fields: [foodItemId], references: [id])
+  foodItemId String
+  createdAt  DateTime @default(now())
+}
+
+// Enums
 
 enum Provider {
   Credentials
