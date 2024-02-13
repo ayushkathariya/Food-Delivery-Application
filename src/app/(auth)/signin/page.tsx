@@ -48,14 +48,10 @@ export default function Page() {
       redirect: false,
     });
     if (res?.ok) {
-      toast.success("Signin Successful", {
-        autoClose: 1500,
-      });
+      toast.success("Signin Successful");
       router.push("/");
     } else {
-      toast.error("Invalid Credentials", {
-        autoClose: 1500,
-      });
+      toast.error("Invalid Credentials");
     }
   };
 
@@ -116,7 +112,11 @@ export default function Page() {
           <Button
             type="button"
             variant={"secondary"}
-            onClick={() => signIn("google")}
+            onClick={async () =>
+              await signIn("google", {
+                callbackUrl: "/",
+              })
+            }
             className="mt-1"
           >
             <FcGoogle className="mr-2 text-xl" />
@@ -124,7 +124,7 @@ export default function Page() {
           </Button>
           <FormDescription className="text-center font-semibold">
             Don't have an account ?
-            <Link href={"/signup"} className="underline text-black">
+            <Link href={"/signup"} className="underline text-gray-800 ml-1">
               Signup
             </Link>
           </FormDescription>
