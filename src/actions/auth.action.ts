@@ -30,7 +30,7 @@ export const signupUser = async (
       charset: "numeric",
     });
 
-    await prisma.verifyUser.create({
+    await prisma.userVerification.create({
       data: {
         name: name,
         email: email,
@@ -72,7 +72,7 @@ export const signupUser = async (
 
 export const verifyUser = async (otp: number, email: string) => {
   try {
-    const verifiedUser = await prisma.verifyUser.findFirst({
+    const verifiedUser = await prisma.userVerification.findFirst({
       where: {
         email,
         otp: Number(otp),
@@ -95,7 +95,7 @@ export const verifyUser = async (otp: number, email: string) => {
       },
     });
 
-    await prisma.verifyUser.delete({
+    await prisma.userVerification.delete({
       where: {
         id: verifiedUser.id,
       },
