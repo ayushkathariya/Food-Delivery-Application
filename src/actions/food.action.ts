@@ -5,6 +5,37 @@ import { cloudinaryConfig } from "@/utils/cloudinary";
 
 cloudinaryConfig();
 
+export const getFoodsByCategory = async (categoryId: string) => {
+  try {
+    const foods = await prisma.foodItem.findMany({
+      where: {
+        categoryId: categoryId,
+      },
+    });
+
+    return { foods };
+  } catch (error) {
+    return { error: "Something went wrong" };
+  }
+};
+
+export const getFoodById = async (id: string) => {
+  try {
+    const food = await prisma.foodItem.findUnique({
+      where: {
+        id,
+      },
+      include: {
+        reviews: true,
+      },
+    });
+
+    return { food };
+  } catch (error) {
+    return { error: "Something went wrong" };
+  }
+};
+
 export const createFoodItem = async (formData: FormData) => {
   try {
     const name = formData.get("name") as string;

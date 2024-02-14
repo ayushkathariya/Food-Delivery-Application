@@ -8,7 +8,7 @@ type FoodProps = {
   id: string;
   name: string;
   description: string;
-  price: string;
+  price: any;
   image: string;
   category: string;
 };
@@ -35,7 +35,7 @@ export default function Food({
         <h1 className="text-lg font-semibold text-white">{name}</h1>
         <p className="mt-2 text-sm text-gray-300">{description}</p>
         <p className="mt-2 text-sm text-gray-300">{`₹ ${price}`}</p>
-        <div className="flex justify-around">
+        <div className=" flex gap-3">
           <Button
             variant={"secondary"}
             className="mt-2"
