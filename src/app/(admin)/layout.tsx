@@ -6,6 +6,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getAuthSession } from "@/utils/auth";
 import { redirect } from "next/navigation";
+import NextTopLoader from "nextjs-toploader";
+import ReduxProvider from "@/components/providers/redux.provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,8 +29,13 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <NextAuthProvider>{children}</NextAuthProvider>
-        <ToastContainer autoClose={2000} />
+        <ReduxProvider>
+          <NextAuthProvider>
+            <NextTopLoader showSpinner={false} color="#333" />
+            {children}
+          </NextAuthProvider>
+          <ToastContainer autoClose={2000} />
+        </ReduxProvider>
       </body>
     </html>
   );

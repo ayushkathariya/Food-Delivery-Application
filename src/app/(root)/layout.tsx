@@ -6,6 +6,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RootNavbar from "@/components/root-navbar";
 import Footer from "@/components/footer";
+import NextTopLoader from "nextjs-toploader";
+import ReduxProvider from "@/components/providers/redux.provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,14 +24,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className}`}>
-        <NextAuthProvider>
-          <RootNavbar />
-          <div className="mt-[3.15rem] px-1">{children}</div>
-          <div className="mt-5">
-            <Footer />
-          </div>
-        </NextAuthProvider>
-        <ToastContainer autoClose={2000} />
+        <ReduxProvider>
+          <NextAuthProvider>
+            <NextTopLoader showSpinner={false} color="#333" />
+            <RootNavbar />
+            <div className="mt-[3.15rem] px-1">{children}</div>
+            <div className="mt-5">
+              <Footer />
+            </div>
+          </NextAuthProvider>
+          <ToastContainer autoClose={2000} />
+        </ReduxProvider>
       </body>
     </html>
   );

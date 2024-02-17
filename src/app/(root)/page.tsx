@@ -1,18 +1,17 @@
 import React from "react";
 import styles from "./page.module.css";
 import { Button } from "@/components/ui/button";
-import Category from "@/components/category";
 import Link from "next/link";
+import Category from "@/components/category";
 import { getCategories } from "@/actions/category.action";
+import Test from "@/components/test";
 
 export default async function Page() {
   const { error, categories } = await getCategories();
-  if (error) {
-    console.log("Error");
-  }
 
   return (
     <>
+      <Test />
       <div className={`${styles.Hero}`}>
         <div className={`${styles.hero_content} ${styles.center}`}>
           <h2 className={styles.heading}>Chicken Resturant</h2>

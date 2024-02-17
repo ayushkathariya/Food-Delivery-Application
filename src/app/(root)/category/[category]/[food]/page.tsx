@@ -46,7 +46,7 @@ export default async function Page({ params }: { params: { food: string } }) {
       </div>
       <div className="px-3">
         <h1 className="text-3xl font-medium">Reviews</h1>
-        <Review />
+        <Review foodId={food?.id as string} />
       </div>
       <div className="mt-4"></div>
     </section>

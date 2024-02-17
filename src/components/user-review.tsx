@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import TimeAgo from "react-timeago";
 import { Star } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -6,7 +9,7 @@ type SingleCommentProps = {
   id: string;
   userName: string;
   userImage: string;
-  timeAgo: string;
+  timeAgo: any;
   comment: string;
 };
 
@@ -29,7 +32,9 @@ export default function UserReview({
             <p className="font-semibold">{userName}</p>
           </div>
           <div>
-            <p className="font-medium">{timeAgo}</p>
+            <span className="font-medium">
+              <TimeAgo date={timeAgo} />
+            </span>
           </div>
         </div>
         <div className="mt-2">
